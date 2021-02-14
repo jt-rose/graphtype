@@ -1,0 +1,32 @@
+{
+  "name": "graphtype",
+  "version": "1.0.0",
+  "description": "typeORM and graphQL server",
+  "main": "server.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon dist/server.js",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@apollo/server": "^3.0.0-alpha.1",
+    "apollo-server-plugin-base": "^0.10.4",
+    "chalk": "^4.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "ioredis": "^4.22.0",
+    "nodemon": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.31"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "dataloader": "^2.0.0",
+    "typescript": "^4.1.5"
+  }
+}
