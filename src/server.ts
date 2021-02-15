@@ -9,6 +9,7 @@ import { GAMES } from './entities/GAMES'
 import { CONSOLES } from './entities/CONSOLES'
 import { CONSOLE_MAKERS } from './entities/CONSOLE_MAKERS'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import { GamesResolver } from './resolvers/gamesResolver'
 
 /* ----------------------------- set up express ----------------------------- */
 
@@ -30,10 +31,9 @@ const main = async () => {
 
   /* -------------------------- set up apollo server -------------------------- */
 
-  /*
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [],
+      resolvers: [GamesResolver],
       validate: false,
     }),
     plugins: [apolloLogger],
@@ -41,7 +41,7 @@ const main = async () => {
   })
 
   apolloServer.applyMiddleware({ app })
-  */
+
   /* ----------------------------- listen on port ----------------------------- */
 
   const port = process.env.LOCAL_PORT

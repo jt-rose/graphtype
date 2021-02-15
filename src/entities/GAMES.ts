@@ -46,6 +46,10 @@ export class GAMES {
 
   @Field()
   @Column()
+  genre: string
+
+  @Field()
+  @Column()
   publisher!: string
 
   // millions
@@ -79,11 +83,11 @@ export class GAMES {
 
   @Field()
   @Column({ type: 'decimal', precision: 2, scale: 1, nullable: true })
-  User_Score!: number
+  user_score!: number
 
   @Field(() => Int)
   @Column({ nullable: true })
-  User_Count: number
+  user_count: number
 
   @Field()
   @Column({ nullable: true })
