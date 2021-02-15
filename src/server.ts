@@ -8,6 +8,7 @@ import { createConnection } from 'typeorm'
 import { GAMES } from './entities/GAMES'
 import { CONSOLES } from './entities/CONSOLES'
 import { CONSOLE_MAKERS } from './entities/CONSOLE_MAKERS'
+import { USERS } from './entities/USERS'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import { GamesResolver } from './resolvers/gamesResolver'
 
@@ -25,7 +26,7 @@ const main = async () => {
     url: process.env.DATABASE_URL,
     logging: true,
     synchronize: true, // disable in prod
-    entities: [GAMES, CONSOLES, CONSOLE_MAKERS],
+    entities: [GAMES, CONSOLES, CONSOLE_MAKERS, USERS],
     namingStrategy: new SnakeNamingStrategy(),
   })
 
