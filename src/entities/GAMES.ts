@@ -41,7 +41,7 @@ export class GAMES {
   console!: CONSOLES
 
   @Field(() => Int)
-  @Column({ type: 'integer' })
+  @Column({ type: 'integer', nullable: true })
   year_of_release!: number
 
   @Field()

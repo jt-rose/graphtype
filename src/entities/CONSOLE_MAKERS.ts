@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm'
+import { Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm'
 import { Field, ObjectType } from 'type-graphql'
 import { CONSOLES } from './CONSOLES'
 
