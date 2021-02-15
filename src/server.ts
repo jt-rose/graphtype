@@ -1,6 +1,9 @@
 import 'reflect-metadata'
 import dotenv from 'dotenv'
 import express from 'express'
+import Redis from 'ioredis'
+import session from 'express-session'
+import connectRedis from 'connect-redis'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import { apolloLogger } from './utils/apolloLogger'
@@ -18,6 +21,28 @@ dotenv.config()
 
 const main = async () => {
   const app = express()
+
+  const RedisStore = connectRedis(session)
+  const redis = new Redis() // auto-connect when on localhost
+
+  app.use(
+    session({
+      name: 'qid',
+      store: new RedisStore({
+        client: redis,
+        disableTouch: true,
+      }),
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      },
+      secret: process.env.COOKIE_SECRET as string,
+      resave: false,
+      saveUninitialized: false,
+    })
+  )
 
   /* ----------------------------- set up typeORM ----------------------------- */
 
@@ -38,7 +63,12 @@ const main = async () => {
       validate: false,
     }),
     plugins: [apolloLogger],
-    // context
+    context: ({ req, res }) => ({
+      req,
+      res,
+      redis,
+      orm, // may not need on context
+    }),
   })
 
   apolloServer.applyMiddleware({ app })

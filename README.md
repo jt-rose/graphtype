@@ -4,7 +4,6 @@ A small backend project using TypeORM with Apollo-server, focusing on:
 
 - integrating TypeORM with TypeGraphQL
 - cursor pagination in Apollo
-- caching in Apollo
 - redis-based auth
 - data loader
 
