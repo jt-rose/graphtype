@@ -1,4 +1,4 @@
-import { Entity, OneToMany, PrimaryColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm'
 import { Field, ObjectType } from 'type-graphql'
 import { CONSOLES } from './CONSOLES'
 
@@ -9,6 +9,8 @@ export class CONSOLE_MAKERS {
   @PrimaryColumn()
   maker!: string
 
+  @Field(() => CONSOLES)
   @OneToMany(() => CONSOLES, (consoles) => consoles.maker)
-  consoles!: CONSOLES
+  @JoinColumn({ name: 'consoles' })
+  consoles!: CONSOLES[]
 }

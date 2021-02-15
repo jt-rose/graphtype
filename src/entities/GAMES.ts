@@ -1,5 +1,11 @@
 import { CONSOLES } from './CONSOLES'
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm'
 import { Field, Int, ObjectType, registerEnumType } from 'type-graphql'
 
 enum Ratings {
@@ -30,11 +36,12 @@ export class GAMES {
   name!: string
 
   @Field()
-  @ManyToOne(() => CONSOLES, (platform) => platform.platform)
-  platform!: CONSOLES
+  @ManyToOne(() => CONSOLES)
+  @JoinColumn({ name: 'console' })
+  console!: CONSOLES
 
   @Field(() => Int)
-  @Column({ type: 'year' })
+  @Column({ type: 'integer' })
   year_of_release!: number
 
   @Field()
