@@ -17,6 +17,7 @@
     "@types/ioredis": "^4.19.4",
     "apollo-server-express": "^2.21.0",
     "apollo-server-plugin-base": "^0.10.4",
+    "argon2": "^0.27.1",
     "chalk": "^4.1.0",
     "connect-redis": "^5.1.0",
     "cors": "^2.8.5",

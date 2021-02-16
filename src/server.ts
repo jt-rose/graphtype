@@ -14,6 +14,9 @@ import { CONSOLE_MAKERS } from './entities/CONSOLE_MAKERS'
 import { USERS } from './entities/USERS'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 import { GamesResolver } from './resolvers/gamesResolver'
+import { UsersResolver } from './resolvers/usersResolver'
+import { MyContext } from './utils/types'
+import { COOKIE_NAME } from './utils/constants'
 
 /* ----------------------------- set up express ----------------------------- */
 
@@ -27,7 +30,7 @@ const main = async () => {
 
   app.use(
     session({
-      name: 'qid',
+      name: COOKIE_NAME,
       store: new RedisStore({
         client: redis,
         disableTouch: true,
@@ -59,11 +62,11 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [GamesResolver],
+      resolvers: [GamesResolver, UsersResolver],
       validate: false,
     }),
     plugins: [apolloLogger],
-    context: ({ req, res }) => ({
+    context: ({ req, res }): MyContext => ({
       req,
       res,
       redis,
