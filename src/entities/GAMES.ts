@@ -1,11 +1,11 @@
 import { CONSOLES } from './CONSOLES'
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   ManyToOne,
   JoinColumn,
   PrimaryColumn,
+  BaseEntity,
 } from 'typeorm'
 import { Field, Int, ObjectType, registerEnumType } from 'type-graphql'
 
@@ -27,7 +27,7 @@ registerEnumType(Ratings, {
 
 @ObjectType()
 @Entity()
-export class GAMES {
+export class GAMES extends BaseEntity {
   @Field(() => Int)
   @PrimaryColumn()
   id!: number
