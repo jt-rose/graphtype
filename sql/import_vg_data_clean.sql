@@ -1,4 +1,5 @@
 COPY games (
+    "id",
     "name",
     console,
     Year_of_Release,
@@ -14,6 +15,8 @@ COPY games (
     User_Score,
     User_Count,
     Developer,
-    Rating
+    Rating,
+    unique_by_name,
+    unique_by_year
 )
 FROM 'C:\Users\jtr21\Desktop\WebDev\graphtype\imports\vg_data_clean.csv' WITH (FORMAT CSV, HEADER);

@@ -5,6 +5,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  PrimaryColumn,
 } from 'typeorm'
 import { Field, Int, ObjectType, registerEnumType } from 'type-graphql'
 
@@ -28,7 +29,7 @@ registerEnumType(Ratings, {
 @Entity()
 export class GAMES {
   @Field(() => Int)
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id!: number
 
   @Field()
@@ -41,7 +42,7 @@ export class GAMES {
   console!: CONSOLES
 
   @Field(() => Int)
-  @Column({ type: 'integer', nullable: true })
+  @Column({ type: 'integer' })
   year_of_release!: number
 
   @Field()
@@ -96,4 +97,12 @@ export class GAMES {
   @Field(() => Ratings)
   @Column('varchar', { length: 4, nullable: true })
   Rating: Ratings
+
+  @Field(() => String)
+  @Column({ unique: true })
+  unique_by_name: string
+
+  @Field(() => String)
+  @Column({ unique: true })
+  unique_by_year: string
 }
