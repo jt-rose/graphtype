@@ -9,9 +9,11 @@ import {
   Field,
   FieldResolver,
   Root,
+  Ctx,
 } from 'type-graphql'
 import { isAuth } from './../middleware/isAuth'
 import { getConnection } from 'typeorm'
+import { MyContext } from 'src/utils/types'
 
 /* ---------------------------- pagination logic ---------------------------- */
 
@@ -68,10 +70,12 @@ const findGamesByName = findGamesByType('unique_by_name')
 
 /* ----------------------------- games resolver ----------------------------- */
 
-@Resolver((type) => GAMES)
+@Resolver(() => GAMES)
 export class GamesResolver {
   @FieldResolver(() => String, { nullable: true })
-  async consoleMaker(@Root() game: GAMES) {
+  async consoleMaker(@Root() game: GAMES, @Ctx() { makerLoader }: MyContext) {
+    // naive implementation of field resolver, n+1 problem
+    /*
     const maker = await getConnection().query(
       `
     SELECT maker FROM consoles
@@ -79,8 +83,10 @@ export class GamesResolver {
     `,
       [game.console]
     )
-    console.log(maker)
-    return maker[0].maker
+    return maker[0].maker*/
+
+    // optimized solution
+    return makerLoader.load(game.console)
   }
 
   @Query(() => String)

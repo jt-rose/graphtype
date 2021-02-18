@@ -17,6 +17,7 @@ import { GamesResolver } from './resolvers/gamesResolver'
 import { UsersResolver } from './resolvers/usersResolver'
 import { MyContext } from './utils/types'
 import { COOKIE_NAME } from './utils/constants'
+import { createMakerLoader } from './utils/makerLoader'
 
 /* ----------------------------- set up express ----------------------------- */
 
@@ -71,6 +72,7 @@ const main = async () => {
       res,
       redis,
       orm, // may not need on context
+      makerLoader: createMakerLoader(),
     }),
   })
 

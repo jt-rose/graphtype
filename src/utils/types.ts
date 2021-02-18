@@ -1,3 +1,4 @@
+import { createMakerLoader } from './makerLoader'
 import { Request, Response } from 'express'
 import { Session } from 'express-session'
 import { Redis } from 'ioredis'
@@ -8,6 +9,7 @@ export type MyContext = {
   res: Response
   redis: Redis
   orm: Connection
+  makerLoader: ReturnType<typeof createMakerLoader>
 }
 
 interface IGetUserIDSession extends Session {
