@@ -9,7 +9,6 @@ export class CONSOLE_MAKERS {
   @PrimaryColumn()
   maker!: string
 
-  @Field(() => CONSOLES)
   @OneToMany(() => CONSOLES, (consoles) => consoles.maker)
   @JoinColumn({ name: 'consoles' })
   consoles!: CONSOLES[]

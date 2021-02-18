@@ -6,5 +6,6 @@ A small backend project using TypeORM with Apollo-server, focusing on:
 - cursor pagination in Apollo
 - redis-based auth
 - data loader
+- graphQL subscriptions
 
 This is a follow-up after completing Ben Awad's Full stack tutorial (completed in my 'Ahab' repos) to get a little more practice in some of these areas
