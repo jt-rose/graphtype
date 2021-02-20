@@ -1,15 +1,19 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm'
 import { Field, Int, ObjectType } from 'type-graphql'
 import { CONSOLE_MAKERS } from './CONSOLE_MAKERS'
 
-enum ConsoleType {
-  home = 'home console',
-  handheld = 'handheld',
-}
+type ConsoleType = 'home console' | 'handheld'
 
 @ObjectType()
 @Entity()
-export class CONSOLES {
+export class CONSOLES extends BaseEntity {
   @Field()
   @PrimaryColumn()
   console!: string
@@ -29,5 +33,16 @@ export class CONSOLES {
   @Field()
   @ManyToOne(() => CONSOLE_MAKERS, (maker) => maker.maker)
   @JoinColumn({ name: 'maker' })
-  maker!: CONSOLE_MAKERS
+  maker!: string
 }
+/*
+CONSOLES.insert({ 
+  console: 'dc2', 
+  full_name: 'dreamcast 2', 
+  year_released: 3000, 
+  console_type: 'home console', 
+  maker: 'Sega' 
+})
+
+CONSOLES.find({ where: { console: 'dc2'}})
+*/
